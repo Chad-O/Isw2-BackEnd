@@ -24,7 +24,7 @@ export default class CERTIFICACIONES extends Model {
       },
       FECHA_EXP: {
         type: DataTypes.DATEONLY,
-        allowNull: false
+        allowNull: true
       },
       URL_CERT:{
         type:DataTypes.STRING(255),
