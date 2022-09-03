@@ -31,7 +31,7 @@ export default class MENSAJES extends Model {
         allowNull: false
       },
       FECHAHORA: {
-        type: DataTypes.DATETIME,
+        type: DataTypes.DATE,
         allowNull: false
       },
       NUMVOTOS:{

@@ -19,24 +19,24 @@ export default function initModels(sequelize){
     const MODULOS = _MODULOS.init(sequelize, DataTypes);
     const LISTA_MODULOS = _LISTA_MODULOS.init(sequelize, DataTypes);
 
-    ALUMNOS.belongsTo(USUARIOS, {as:"ID_USUARIO", foreignKey: "ID_USUARIO"});
-    USUARIOS.hasMany(ALUMNOS, {as: "USUARIOS", foreignKey: "ID_USUARIO"});
-    PROFESORES.belongsTo(USUARIOS, {as: "ID_USUARIO", foreignKey: "ID_USUARIO"});
-    USUARIOS.hasMany(PROFESORES, {as: "USUARIOS", foreignKey: "ID_USUARIO"});
-    CERTIFICACIONES.belongsTo(PROFESORES, {as : "ID_PROFESOR", foreignKey:"ID_PROFESOR"});
-    PROFESORES.hasMany(CERTIFICACIONES, {as: "PROFESORES", foreignKey: "ID_PROFESOR"});
-    MENSAJES.belongsTo(HILOS, {as: "ID_HILO", foreignKey: "ID_HILO"});
-    HILOS.hasMany(MENSAJES, {as: "HILOS", foreignKey:"ID_HILOS"});
-    HILOS.belongsTo(USUARIOS, {as: "ID_USUARIO", foreignKey:"ID_USUARIO"});
-    USUARIOS.hasMany(HILOS, {as : "USUARIOS", foreignKey: "ID_HILO"});
-    MENSAJES.belongsTo(USUARIOS, {as: "ID_USUARIO", foreignKey:"ID_USUARIO"});
-    USUARIOS.hasMany(MENSAJES, {as: "USUARIOS", foreignKey: "ID_USUARIOS"});
-    MODULOS.belongsTo(ALUMNOS, {as: "ID_ALUMNO", foreignKey:"ID_ALUMNO"});
-    ALUMNOS.hasMany(MODULOS, {as: "ALUMNOS", foreignKey:"ID_ALUMNO"});        
-    LISTA_MODULOS.belongsTo(PROFESORES, {as: "ID_PROFESOR", foreignKey:"ID_PROFESOR"});
-    PROFESORES.hasMany(LISTA_MODULOS, {as: "PROFESORES", foreignKey: "ID_PROFESOR"});
-    MODULOS.belongsTo(LISTA_MODULOS, {as: "ID_MODULOS", foreignKey:"ID_MODULOS"});
-    LISTA_MODULOS.hasMany(MODULOS, {as: "MODULOS", foreignKey:"ID_MODULOS"});
+    ALUMNOS.belongsTo(USUARIOS, {as:"ID_USUARIO_USR", foreignKey: "ID_USUARIO"});
+    USUARIOS.hasMany(ALUMNOS, {as: "ALUMNOs", foreignKey: "ID_USUARIO"});
+    PROFESORES.belongsTo(USUARIOS, {as: "ID_USUARIO_USR", foreignKey: "ID_USUARIO"});
+    USUARIOS.hasMany(PROFESORES, {as: "PROFESOREs", foreignKey: "ID_USUARIO"});
+    CERTIFICACIONES.belongsTo(PROFESORES, {as : "ID_PROFESOR_PR", foreignKey:"ID_PROFESOR"});
+    PROFESORES.hasMany(CERTIFICACIONES, {as: "CERTIFICADOs", foreignKey: "ID_PROFESOR"});
+    MENSAJES.belongsTo(HILOS, {as: "ID_HILO_HI", foreignKey: "ID_HILO"});
+    HILOS.hasMany(MENSAJES, {as: "MENSAJEs", foreignKey:"ID_HILOS"});
+    HILOS.belongsTo(USUARIOS, {as: "ID_USUARIO_USR", foreignKey:"ID_USUARIO"});
+    USUARIOS.hasMany(HILOS, {as : "HILOs", foreignKey: "ID_HILO"});
+    MENSAJES.belongsTo(USUARIOS, {as: "ID_USUARIO_USR", foreignKey:"ID_USUARIO"});
+    USUARIOS.hasMany(MENSAJES, {as: "MENSAJEs", foreignKey: "ID_USUARIOS"});
+    MODULOS.belongsTo(ALUMNOS, {as: "ID_ALUMNO_AL", foreignKey:"ID_ALUMNO"});
+    ALUMNOS.hasMany(MODULOS, {as: "ALUMNOs", foreignKey:"ID_ALUMNO"});        
+    LISTA_MODULOS.belongsTo(PROFESORES, {as: "ID_PROFESOR_PR", foreignKey:"ID_PROFESOR"});
+    PROFESORES.hasMany(LISTA_MODULOS, {as: "PROFESOREs", foreignKey: "ID_PROFESOR"});
+    MODULOS.belongsTo(LISTA_MODULOS, {as: "ID_MODULOS_MO", foreignKey:"ID_MODULOS"});
+    LISTA_MODULOS.hasMany(MODULOS, {as: "MODULOs", foreignKey:"ID_MODULOS"});
 
     return{
         USUARIOS,

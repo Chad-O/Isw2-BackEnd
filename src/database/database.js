@@ -15,7 +15,7 @@ if(process.env.DATABASE_URL){
     );
 }
 else{
-    sequelize = new Sequelize('ISW2_GRUPO5', 'postgres', 'contra', {
+    sequelize = new Sequelize('Isw2', 'postgres', 'contra', {
         host: 'localhost',
         dialect:  'postgres' 
     });
