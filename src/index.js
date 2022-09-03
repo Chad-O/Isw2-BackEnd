@@ -1,7 +1,7 @@
 import app from './app.js'
 import { DataTypes } from 'sequelize';
 import {sequelize} from './database/database.js'
-import {InicializarModelos} from './models/modelos.js'
+import {InicializarModelos} from './models/MODELS.js'
 
 
 
@@ -9,7 +9,7 @@ async function main() {
     try {
         //sequelize.drop();
         InicializarModelos();
-        await sequelize.sync({force : false});
+        await sequelize.sync({force : true});
         const queryInterface = sequelize.getQueryInterface();
 
         //queryInterface.addColumn('CITAS', 'LINK', { type: DataTypes.STRING });
