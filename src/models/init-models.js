@@ -26,9 +26,9 @@ export default function initModels(sequelize){
     CERTIFICACIONES.belongsTo(PROFESORES, {as : "ID_PROFESOR_PR", foreignKey:"ID_PROFESOR"});
     PROFESORES.hasMany(CERTIFICACIONES, {as: "CERTIFICADOs", foreignKey: "ID_PROFESOR"});
     MENSAJES.belongsTo(HILOS, {as: "ID_HILO_HI", foreignKey: "ID_HILO"});
-    HILOS.hasMany(MENSAJES, {as: "MENSAJEs", foreignKey:"ID_HILOS"});
+    HILOS.hasMany(MENSAJES, {as: "MENSAJEs", foreignKey:"ID_HILO"});
     HILOS.belongsTo(USUARIOS, {as: "ID_USUARIO_USR", foreignKey:"ID_USUARIO"});
-    USUARIOS.hasMany(HILOS, {as : "HILOs", foreignKey: "ID_HILO"});
+    USUARIOS.hasMany(HILOS, {as : "HILOs", foreignKey: "ID_USUARIO"});
     MENSAJES.belongsTo(USUARIOS, {as: "ID_USUARIO_USR", foreignKey:"ID_USUARIO"});
     USUARIOS.hasMany(MENSAJES, {as: "MENSAJEs", foreignKey: "ID_USUARIOS"});
     MODULOS.belongsTo(ALUMNOS, {as: "ID_ALUMNO_AL", foreignKey:"ID_ALUMNO"});
