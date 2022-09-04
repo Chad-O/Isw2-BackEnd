@@ -4,7 +4,7 @@ import {getHilo,
         createHilo,
         updateHilo,
         deleteHilo}
-        from "../controllers/hilos.controller";
+        from "../controllers/hilos.controller.js";
 
 const router = new Router();
 

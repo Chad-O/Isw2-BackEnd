@@ -4,7 +4,7 @@ import { getListaMod,
         createLista_Mod,
         updateLista_Mod,
         deleteLista_Mod}
-         from "../controllers/lista_modulos.controller";
+         from "../controllers/lista_modulos.controller.js";
 
 const router = new Router();
 
