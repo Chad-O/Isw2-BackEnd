@@ -7,12 +7,11 @@ import {InicializarModelos} from './models/MODELS.js'
 
 async function main() {
     try {
-        InicializarModelos();
+        
+        //InicializarModelos();
         console.log("Salió Modelos");
         //await sequelize.sync({force : true});
-        console.log("Force True");
-        const queryInterface = sequelize.getQueryInterface();
-        console.log("Query");
+        //console.log("Force True");
         console.log("Conexión realizada con éxito")
         var PORT = process.env.PORT ||4000;
         app.listen(PORT);
