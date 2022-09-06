@@ -22,7 +22,7 @@ export default class MENSAJES extends Model {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'HILO',
+          model: 'HILOS',
           key: 'ID_HILO'
         }
       },

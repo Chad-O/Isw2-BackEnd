@@ -10,7 +10,7 @@ async function main() {
         
         InicializarModelos();
         // console.log("Salió Modelos");
-         //await sequelize.sync({force : false});
+        await sequelize.sync({force : false});
         // console.log("Force True");
         console.log("Conexión realizada con éxito")
         var PORT = process.env.PORT ||4000;

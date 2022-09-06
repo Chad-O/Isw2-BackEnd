@@ -1,20 +1,21 @@
 import _sequelize from 'sequelize';
+import MODULOS from './MODULOS.js';
 const {Model, Sequelize} = _sequelize;
 
 export default class LISTA_MODULO extends Model {
     static init(sequelize, DataTypes) {
     return super.init({
-      ID_LISTA_MOD: {
+      ID_LISTAMOD: {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
       },
-      ID_MODULOS: {
+      ID_MODULO: {
         type: DataTypes.INTEGER,
         allowNull:false,
         references:{
-          model:'MODULO',
+          model:"MODULOS",
           key: 'ID_MODULO'
         }
       },
@@ -36,7 +37,7 @@ export default class LISTA_MODULO extends Model {
           name: "LISTA_MODULOS_pkey",
           unique: true,
           fields: [
-            { name: "ID_LISTA_MOD" },
+            { name: "ID_LISTAMOD" },
           ]
         },
       ]
