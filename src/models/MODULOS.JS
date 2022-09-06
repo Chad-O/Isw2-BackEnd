@@ -40,15 +40,14 @@ export default class MODULOS extends Model {
       }
     }, {
       sequelize,
-      tableName: "MODULOS",
-      schema: 'public',
+      tableName: 'MODULOS',
       timestamps: false,
       indexes: [
         {
-          name: "MODULOS_pkey",
+          name: 'MODULOS_pkey',
           unique: true,
           fields: [
-            { name: "ID_MODULO" },
+            { name: 'ID_MODULO'},
           ]
         },
       ]

@@ -15,7 +15,7 @@ export default class LISTA_MODULO extends Model {
         type: DataTypes.INTEGER,
         allowNull:false,
         references:{
-          model:"MODULOS",
+          model:'MODULOS',
           key: 'ID_MODULO'
         }
       },
