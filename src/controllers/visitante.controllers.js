@@ -33,10 +33,10 @@ const buscarUsuarios = async (req,res) =>{
 }
 //registrar usuario y profesor
 const registrarProfesor = async (req, res) => {
-    const { PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
+    const { TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
     
     try {
-        console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
+        console.log(TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
         const result = await pool.query('INSERT INTO USUARIOS ("PRIMER_NOM","AP_PAT","AP_MAT","NOM_USUARIO","PASSWORD","E_MAIL","NUM_CEL","DOC_ID") VALUES ("$1","$2","$3","$4", "$52, "$6", "$7", "$8") RETURNING *', 
         [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de doctores
@@ -54,10 +54,10 @@ const registrarProfesor = async (req, res) => {
 
 //Registrar usuario y alumno
 const registrarAlumno = async (req, res) => {
-    const { PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
+    const { TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
     
     try {
-        console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
+        console.log(TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
         const result = await pool.query('INSERT INTO "USUARIOS" ("PRIMER_NOM","AP_PAT","AP_MAT","NOM_USUARIO","PASSWORD","E_MAIL","NUM_CEL","DOC_ID") VALUES ("$1","$2","$3","$4", "$52, "$6", "$7", "$8") RETURNING *', 
         [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de alumnos
