@@ -4,25 +4,14 @@ const pool = require('../db');
 const iniciarSesion = async (req, res) => {
     const { email, password} = req.body;
     try {
-        const result = await pool.query('SELECT * FROM "USUARIOS" WHERE "EMAIL" = "$1" ', [email]);
-
+        const result = await pool.query('SELECT * FROM "USUARIO" WHERE "E_MAIL" = $1 ', [email]);
         if (result.rows.length === 0) {
             return res.status(401).json("Invalid Credential");
         }
-        console.log(result);
 
-        if (password === result.rows[0].contrasena) {
-            if (result.rows[0].perfil_user === "usuario"){
-                res.json(result.rows[0])
-
-                const result2 = await pool.query('SELECT "ID_PROFESOR" FROM "PROFESOR" WHERE "ID_USUARIO" = "$1" ', [result.rows[0].ID_USUARIO]);
-                console.log(req.session)
-            }else{
-                const result2 = await pool.query('SELECT * FROM "ALUMNOS" JOIN "USUARIOS" ON "ALUMNOS.ID_USER" = "USUARIOS.ID_USER" WHERE "USUARIOS.ID_USER" = $1 ',
-                 [result.rows[0].ID_USUARIO]);
-                res.json(result2.rows[0]) 
-                console.log(req.session)
-            }
+        if (password === result.rows[0].PASSWORD) {
+            
+            return res.json(result.rows[0])
         }
         return res.status(401).json("Invalid password");
         
