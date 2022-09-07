@@ -3,7 +3,7 @@ const { iniciarSesion,
         buscarUsuarios,
         registrarProfesor, 
         registrarAlumno } = require('../controllers/visitante.controllers.js');
-
+const validInfo = require("../middleware/validInfo");
 
 const router = Router();
 router.get('/usuarios', buscarUsuarios);
