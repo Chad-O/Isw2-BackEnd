@@ -47,7 +47,7 @@ const registrarProfesor = async (req, res) => {
     
     try {
         console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
-        const result = await pool.query('INSERT INTO USUARIOS () VALUES ($1,$2,$3,$4, $5, $6, $7, $8) RETURNING *', 
+        const result = await pool.query('INSERT INTO USUARIOS ("PRIMER_NOM","AP_PAT","AP_MAT","NOM_USUARIO","PASSWORD","E_MAIL","NUM_CEL","DOC_ID") VALUES ("$1","$2","$3","$4", "$52, "$6", "$7", "$8") RETURNING *', 
         [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de doctores
         const id_doc = result.rows[0].DOC_ID;
@@ -68,7 +68,7 @@ const registrarAlumno = async (req, res) => {
     
     try {
         console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
-        const result = await pool.query('INSERT INTO USUARIOS () VALUES ($1,$2,$3,$4, $5, $6, $7, $8) RETURNING *', 
+        const result = await pool.query('INSERT INTO USUARIOS ("PRIMER_NOM","AP_PAT","AP_MAT","NOM_USUARIO","PASSWORD","E_MAIL","NUM_CEL","DOC_ID") VALUES ("$1","$2","$3","$4", "$52, "$6", "$7", "$8") RETURNING *', 
         [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de alumnos
         const id_usuario = await pool.query('SELECT "ID_USUARIO" FROM "USUARIO"  WHERE "DOC_ID" = ($1) RETURNING *',[id_doc]);
