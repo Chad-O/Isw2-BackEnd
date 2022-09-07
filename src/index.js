@@ -1,24 +1,37 @@
-import app from './app.js'
-import { DataTypes } from 'sequelize';
-import {sequelize} from './database/database.js'
-import {InicializarModelos} from './models/MODELS.js'
+const express = require('express');
+const morgan = require('morgan');
+const cors = require("cors");
+const router = require('./routes/visitante.routes')
+const session = require('express-session')
+
+const app = express();
+
+// puerto
+app.set("port", process.env.PORT || 4000);
+
+// Middlewares
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(session({
+  secret:'12345',
+  resave: true,
+  saveUninitialized: true
+}))
+//Routes
+app.use(router);
 
 
+//handling error
+app.use((err, req, res, next) => {
+    return res.status(500).json({
+      status: "error",
+      message: err.message,
+    });
+  });
 
-async function main() {
-    try {
-        
-        InicializarModelos();
-        // console.log("Salió Modelos");
-        await sequelize.sync({force : true});
-        // console.log("Force True");
-        console.log("Conexión realizada con éxito")
-        var PORT = process.env.PORT ||4000;
-        app.listen(PORT);
-        console.log("servidor corriendo en el puerto", PORT);
-        
-    } catch (error) {
-        console.log(error)
-    }
-}
-main();
+
+app.listen(app.get("port"));
+console.log('Server on port', app.get("port"));
+
