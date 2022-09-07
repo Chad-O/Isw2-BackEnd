@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const { iniciarSesion, 
+        buscarUsuarios,
         registrarProfesor, 
         registrarAlumno } = require('../controllers/visitante.controllers.js');
 
 
 const router = Router();
-
+router.get('/usuarios', buscarUsuarios);
 router.post('/visitante/registrarProfesor', registrarProfesor);
 
 router.post('/visitante/registarAlumno',registrarAlumno);

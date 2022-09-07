@@ -4,7 +4,7 @@ const pool = require('../db');
 const iniciarSesion = async (req, res) => {
     const { email, password} = req.body;
     try {
-        const result = await pool.query('SELECT * FROM USERS WHERE EMAIL = $1 ', [email]);
+        const result = await pool.query('SELECT * FROM "USUARIOS" WHERE "EMAIL" = "$1" ', [email]);
 
         if (result.rows.length === 0) {
             return res.status(401).json("Invalid Credential");
@@ -12,13 +12,14 @@ const iniciarSesion = async (req, res) => {
         console.log(result);
 
         if (password === result.rows[0].contrasena) {
-            if (result.rows[0].perfil_user === "doctor"){
+            if (result.rows[0].perfil_user === "usuario"){
                 res.json(result.rows[0])
 
-                const result2 = await pool.query('SELECT ID_DOCTOR FROM DOCTORES WHERE ID_USER = $1 ', [result.rows[0].id_user]);
+                const result2 = await pool.query('SELECT "ID_PROFESOR" FROM "PROFESOR" WHERE "ID_USUARIO" = "$1" ', [result.rows[0].ID_USUARIO]);
                 console.log(req.session)
             }else{
-                const result2 = await pool.query('SELECT * FROM PACIENTES P JOIN USERS U ON P.ID_USER = U.ID_USER WHERE U.ID_USER = $1 ', [result.rows[0].id_user]);
+                const result2 = await pool.query('SELECT * FROM "ALUMNOS" JOIN "USUARIOS" ON "ALUMNOS.ID_USER" = "USUARIOS.ID_USER" WHERE "USUARIOS.ID_USER" = $1 ',
+                 [result.rows[0].ID_USUARIO]);
                 res.json(result2.rows[0]) 
                 console.log(req.session)
             }
@@ -30,19 +31,29 @@ const iniciarSesion = async (req, res) => {
     }
 }
 
+//BuscarTodoslosUsuarios
+const buscarUsuarios = async (req,res) =>{
+    try{
+        const result = await pool.query('SELECT * FROM "USUARIOS"')
+    }
+    catch(error){
+        console.error(error.message);
+    }
+    
+}
 //registrar usuario y profesor
 const registrarProfesor = async (req, res) => {
-    const { email, contraseña, nombres, apellidos, especialidad } = req.body;
+    const { PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
     
     try {
-        console.log(email, contraseña, nombres, apellidos, especialidad)
-        const result = await pool.query('INSERT INTO USERS (EMAIL,CONTRASENA, PERFIL_USER) VALUES ($1,$2,$3) RETURNING *', [email, contraseña,"doctor"]);
+        console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
+        const result = await pool.query('INSERT INTO USUARIOS () VALUES ($1,$2,$3,$4, $5, $6, $7, $8) RETURNING *', 
+        [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de doctores
-        const id_register = result.rows[0].id_user;
-        console.log(email, contraseña, nombres, apellidos, especialidad)
+        const id_doc = result.rows[0].DOC_ID;
+        const id_usuario = await pool.query('SELECT "ID_USUARIO" FROM "USUARIO"  WHERE "DOC_ID" = ($1) RETURNING *',[id_doc]);
         console.log(id_register);
-        
-        const result2 = await pool.query('INSERT INTO DOCTORES (ID_USER,NOMBRES, APELLIDOS, ID_ESPECIALIDAD) VALUES ($1,$2,$3,$4) RETURNING *', [id_register,nombres,apellidos, especialidad ])
+        const result2 = await pool.query('INSERT INTO "PROFESORES" (ID_USUARIO) VALUES ($1) RETURNING *', [id_usuario]);
         
         res.json(result2.rows[0]);
     } catch (error) {
@@ -53,14 +64,16 @@ const registrarProfesor = async (req, res) => {
 
 //Registrar usuario y alumno
 const registrarAlumno = async (req, res) => {
-    const { email, contraseña, nombres, apellidos} = req.body;
-
+    const { PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
+    
     try {
-        const result = await pool.query('INSERT INTO USERS (EMAIL,CONTRASENA, PERFIL_USER) VALUES ($1,$2,$3) RETURNING *', [email, contraseña,"paciente"]);
+        console.log(PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
+        const result = await pool.query('INSERT INTO USUARIOS () VALUES ($1,$2,$3,$4, $5, $6, $7, $8) RETURNING *', 
+        [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
         //almacenamos el id del usuario para usarlo en el registro de alumnos
-        const id_register = result.rows[0].id_user;
-        
-        const result2 = await pool.query('INSERT INTO PACIENTES(ID_USER,NOMBRES, APELLIDOS) VALUES ($1,$2,$3) RETURNING *', [id_register,nombres,apellidos])
+        const id_usuario = await pool.query('SELECT "ID_USUARIO" FROM "USUARIO"  WHERE "DOC_ID" = ($1) RETURNING *',[id_doc]);
+        console.log(id_register);
+        const result2 = await pool.query('INSERT INTO "ALUMNOS" (ID_USUARIO) VALUES ($1) RETURNING *', [id_usuario]);
         
         res.json(result2.rows[0]);
     } catch (error) {
@@ -71,6 +84,7 @@ const registrarAlumno = async (req, res) => {
 
 module.exports = {
     iniciarSesion,
+    buscarUsuarios,
     registrarProfesor,
     registrarAlumno
 }
