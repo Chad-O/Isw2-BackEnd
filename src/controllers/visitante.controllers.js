@@ -2,9 +2,10 @@ const pool = require('../db');
 
 //Iniciar Sesión
 const iniciarSesion = async (req, res) => {
+    console.log("penesito!!!!!!!!!!!!!!!!!!!!");
     const { email, password} = req.body;
     try {
-        const result = await pool.query('SELECT * FROM USERS WHERE EMAIL = $1 ', [email]);
+        const result = await pool.query('SELECT * FROM USUARIO WHERE EMAIL = $1 ', [email]);
 
         if (result.rows.length === 0) {
             return res.status(401).json("Invalid Credential");
