@@ -34,7 +34,8 @@ const iniciarSesion = async (req, res) => {
 //BuscarTodoslosUsuarios
 const buscarUsuarios = async (req,res) =>{
     try{
-        const result = await pool.query('SELECT * FROM "USUARIOS"')
+        const result = await pool.query('SELECT * FROM "USUARIO"')
+        res.json(result)
     }
     catch(error){
         console.error(error.message);

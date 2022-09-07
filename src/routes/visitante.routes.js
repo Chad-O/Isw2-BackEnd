@@ -8,10 +8,10 @@ const validInfo = require("../middleware/validInfo");
 const router = Router();
 router.get('/usuarios', buscarUsuarios);
 
-router.post('/visitante/registrarProfesor', registrarProfesor);
+router.post('/registrarProfesor', registrarProfesor);
 
-router.post('/visitante/registarAlumno',registrarAlumno);
+router.post('/registarAlumno',registrarAlumno);
 
-router.post('/visitante/iniciarSesion',validInfo, iniciarSesion);
+router.post('/iniciarSesion',validInfo, iniciarSesion);
 
 module.exports = router;
