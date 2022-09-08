@@ -12,6 +12,6 @@ router.post('/registrarProfesor', registrarProfesor);
 
 router.post('/registarAlumno',registrarAlumno);
 
-router.post('/iniciarSesion',validInfo, iniciarSesion);
+router.post('/visitante/iniciarSesion',validInfo, iniciarSesion);
 
 module.exports = router;
