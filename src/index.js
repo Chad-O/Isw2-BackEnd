@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require("cors");
-const router = require('./routes/visitante.routes')
+const routerVisitante = require('./routes/visitante.routes');
+const routerProfesor = require('./routes/profesor.routes');
 const session = require('express-session')
 
 const app = express();
@@ -20,7 +21,8 @@ app.use(session({
   saveUninitialized: true
 }))
 //Routes
-app.use(router);
+app.use(routerVisitante);
+app.use(routerProfesor);
 
 
 //handling error
