@@ -71,10 +71,23 @@ const registrarAlumno = async (req, res) => {
     }
 }
 
+//Cambiar contraseña de usuario
+const cambioContraseña = async (req,res) =>{
+    const{PASSWORD, E_MAIL} = req.body;
+    try{
+        console.log(PASSWORD, E_MAIL);
+        const result = await pool.query('UPDATE "USUARIOS" SET "PASSWORD" = $1 WHERE "E_MAIL" = $2');
+
+    }catch(error)
+    {
+        res.json({error: error.message});
+    }
+}
 
 module.exports = {
     iniciarSesion,
     buscarUsuarios,
     registrarProfesor,
-    registrarAlumno
+    registrarAlumno,
+    cambioContraseña
 }
