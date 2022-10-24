@@ -29,10 +29,6 @@ app.use(routerProfesor);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
-
-
-
-
 app.listen(app.get("port"));
 console.log('Server on port', app.get("port"));
 
