@@ -3,7 +3,8 @@ const { iniciarSesion,
         buscarUsuarios,
         registrarProfesor, 
         registrarAlumno,
-        cambioContraseña } = require('../controllers/visitante.controllers.js');
+        cambioContraseña,
+        cursosUsuario } = require('../controllers/visitante.controllers.js');
 const validInfo = require("../middleware/validInfo");
 
 const routerVisitante = Router();
@@ -16,5 +17,7 @@ routerVisitante.post('/visitante/registarAlumno',registrarAlumno);
 routerVisitante.post('/visitante/iniciarSesion',validInfo, iniciarSesion);
 
 routerVisitante.put('/visitante/cambioContraseña', cambioContraseña);
+
+routerVisitante.post('visitante/cursosUsuario', cursosUsuario);
 
 module.exports = routerVisitante;

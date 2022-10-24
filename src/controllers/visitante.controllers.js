@@ -60,6 +60,7 @@ const registrarAlumno = async (req, res) => {
         console.log(TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID)
         const result = await pool.query('INSERT INTO "USUARIOS" ("PRIMER_NOM","AP_PAT","AP_MAT","NOM_USUARIO","PASSWORD","E_MAIL","NUM_CEL","DOC_ID") VALUES ("$1","$2","$3","$4", "$52, "$6", "$7", "$8") RETURNING *', 
         [PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID]);
+        res.json(result);
         //almacenamos el id del usuario para usarlo en el registro de alumnos
         const id_usuario = await pool.query('SELECT "ID_USUARIO" FROM "USUARIO"  WHERE "DOC_ID" = ($1) RETURNING *',[id_doc]);
         console.log(id_register);
@@ -84,10 +85,24 @@ const cambioContraseña = async (req,res) =>{
     }
 }
 
+//Recibir Cursos de Usuario
+const cursosUsuario = async (req,res) => {
+    const{ID_USUARIO} = req.body;
+    try{
+        console.log(ID_USUARIO);
+        const result = await pool.query ('SELECT * FROM "CURSOS" WHERE "ID_USUARIO" = $1',[ID_USUARIO]);      
+        return res.json(result.rows[0])
+    }catch(error)
+    {
+        res.json({error: error.message});
+    }
+}
+
 module.exports = {
     iniciarSesion,
     buscarUsuarios,
     registrarProfesor,
     registrarAlumno,
-    cambioContraseña
+    cambioContraseña,
+    cursosUsuario
 }
