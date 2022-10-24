@@ -6,6 +6,7 @@ const routerProfesor = require('./routes/profesor.routes');
 const session = require('express-session')
 
 const app = express();
+const bodyParser = require('body-parser');
 
 // puerto
 app.set("port", process.env.PORT || 4000);
@@ -24,14 +25,12 @@ app.use(session({
 app.use(routerVisitante);
 app.use(routerProfesor);
 
+// Aumentar límite al req
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
-//handling error
-app.use((err, req, res, next) => {
-    return res.status(500).json({
-      status: "error",
-      message: err.message,
-    });
-  });
+
+
 
 
 app.listen(app.get("port"));
