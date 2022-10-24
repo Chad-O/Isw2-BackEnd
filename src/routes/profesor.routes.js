@@ -5,5 +5,4 @@ const routerProfesor = Router();
 
 routerProfesor.post('/profesor/subirArchivo', subirArchivo);
 
-
 module.exports = routerProfesor;
