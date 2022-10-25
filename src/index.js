@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 const routerVisitante = require('./routes/visitante.routes');
 const routerProfesor = require('./routes/profesor.routes');
+const routerCurso = require('./routes/curso.routes');
 const session = require('express-session')
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(session({
 //Routes
 app.use(routerVisitante);
 app.use(routerProfesor);
+app.use(routerCurso);
 
 app.listen(app.get("port"));
 console.log('Server on port', app.get("port"));
