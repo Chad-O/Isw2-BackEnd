@@ -90,7 +90,7 @@ const cursosUsuario = async (req,res) => {
     const{ID_USUARIO} = req.body;
     try{
         console.log(ID_USUARIO);
-        const result = await pool.query ('SELECT * FROM "CURSOS" WHERE "ID_USUARIO" = $1',[ID_USUARIO]);      
+        const result = await pool.query ('SELECT * FROM "LISTA_CURSOS" LC LEFT JOIN "CURSO" C ON LC."ID_CURSO" = C."ID_CURSO" WHERE "ID_USUARIO" = $1',[ID_USUARIO]);      
         return res.json(result.rows[0])
     }catch(error)
     {
