@@ -6,6 +6,6 @@ const routerCurso = Router();
 
 routerCurso.get('/curso/mostrarCursos', mostrarCursos);
 
-routerCurso.get('visitante/cursosUsuario/:id', cursosUsuario);
+routerCurso.get('curso/cursosUsuario/:id', cursosUsuario);
 
 module.exports = routerCurso;
