@@ -18,6 +18,5 @@ routerVisitante.post('/visitante/iniciarSesion',validInfo, iniciarSesion);
 
 routerVisitante.put('/visitante/cambioContraseña', cambioContraseña);
 
-routerVisitante.post('visitante/cursosUsuario/:id', cursosUsuario);
 
 module.exports = routerVisitante;
