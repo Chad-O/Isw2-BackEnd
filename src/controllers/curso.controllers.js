@@ -14,8 +14,8 @@ const mostrarCursos = async (req, res) => {
 const cursosUsuario = async (req,res) => {
   const{id} = req.body;
   try{
-      alert(id);
       const result = await pool.query('SELECT * FROM "LISTA_CURSO" LC JOIN "CURSO" C ON LC."ID_CURSO" = C."ID_CURSO" WHERE "ID_USUARIO" = $1',[id]);      
+      console.log(result)
       res.json(result.rows);
   }catch(error)
   {
