@@ -1,4 +1,6 @@
 const pool = require('../db');
+const fs = require('fs');
+const { type } = require('os');
 
 //Mostrar Cursos
 const mostrarCursos = async (req, res) => {
@@ -16,9 +18,23 @@ const mostrarCursos = async (req, res) => {
 //Mostrar Material del curso
 const mostrarMaterial = async (req, res) => {
   const { id_curso } = req.body;
+
   try {
     const material = await pool.query('SELECT * FROM "MATERIAL" WHERE "ID_CURSO" = $1', [id_curso]);
-    res.json(material);
+
+    //Obtener rows del query
+    const material_rows = material.rows[0];
+    //Obtener link
+    const link = material_rows.LINK;
+    //Buscar material en los files
+    const data = fs.readFileSync("src/files/"+link, 'base64');
+    //Transformarlo a string
+    const data_par = JSON.stringify(data);
+    //Transformarlo a JSON
+    const data_json = JSON.parse(`{"MATERIAL":${data_par}}`);
+    //Combinar consulta con archivo
+    const todo_material = Object.assign(material_rows, data_json);
+    res.json(todo_material);
   } catch (error) {
     res.json({ error: error.message });
     }
