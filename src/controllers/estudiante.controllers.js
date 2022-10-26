@@ -13,7 +13,19 @@ const mostrarCursos = async (req, res) => {
     }
 }
 
+//Mostrar Material del curso
+const mostrarMaterial = async (req, res) => {
+  const { id_curso } = req.body;
+  try {
+    const material = await pool.query('SELECT * FROM "MATERIAL" WHERE "ID_CURSO" = $1', [id_curso]);
+    res.json(material);
+  } catch (error) {
+    res.json({ error: error.message });
+    }
+}
+
 
 module.exports = {
-    mostrarCursos
+    mostrarCursos,
+    mostrarMaterial
 }
