@@ -77,21 +77,8 @@ const cambioContraseña = async (req,res) =>{
     const{PASSWORD, E_MAIL} = req.body;
     try{
         console.log(PASSWORD, E_MAIL);
-        const result = await pool.query('UPDATE "USUARIOS" SET "PASSWORD" = $1 WHERE "E_MAIL" = $2');
+        const result = await pool.query('UPDATE "USUARIOS" SET "PASSWORD" = $1 WHERE "E_MAIL" = $2',[PASSWORD,E_MAIL]);
 
-    }catch(error)
-    {
-        res.json({error: error.message});
-    }
-}
-
-//Recibir Cursos de Usuario
-const cursosUsuario = async (req,res) => {
-    const{ID_USUARIO} = req.body;
-    try{
-        console.log(ID_USUARIO);
-        const result = await pool.query ('SELECT * FROM "CURSOS" WHERE "ID_USUARIO" = $1',[ID_USUARIO]);      
-        return res.json(result.rows[0])
     }catch(error)
     {
         res.json({error: error.message});
@@ -103,6 +90,5 @@ module.exports = {
     buscarUsuarios,
     registrarProfesor,
     registrarAlumno,
-    cambioContraseña,
-    cursosUsuario
+    cambioContraseña
 }

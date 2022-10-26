@@ -10,8 +10,20 @@ const mostrarCursos = async (req, res) => {
     console.error(error.message);
     }
 }
-
+//Recibir Cursos de Usuario
+const cursosUsuario = async (req,res) => {
+  const{id} = req.body;
+  try{
+      const result = await pool.query('SELECT * FROM "LISTA_CURSO" LC JOIN "CURSO" C ON LC."ID_CURSO" = C."ID_CURSO" WHERE "ID_USUARIO" = $1',[id]);      
+      console.log(result)
+      res.json(result.rows[0]);
+  }catch(error)
+  {
+      res.json({error: error.message});
+  }
+}
 
 module.exports = {
-    mostrarCursos
+    mostrarCursos,
+    cursosUsuario
 }
