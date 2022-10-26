@@ -4,6 +4,7 @@ const cors = require("cors");
 const routerVisitante = require('./routes/visitante.routes');
 const routerProfesor = require('./routes/profesor.routes');
 const routerCurso = require('./routes/curso.routes');
+const routerEstudiante = require('./routes/estudiante.routes');
 const session = require('express-session')
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(session({
 app.use(routerVisitante);
 app.use(routerProfesor);
 app.use(routerCurso);
+app.use(routerEstudiante);
 
 app.listen(app.get("port"));
 console.log('Server on port', app.get("port"));
