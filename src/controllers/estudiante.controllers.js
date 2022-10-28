@@ -40,8 +40,23 @@ const mostrarMaterial = async (req, res) => {
     }
 }
 
+//Mostrar Material del curso
+const mostrarExamen = async (req, res) => {
+  
+  const { id_curso } = req.body;
+  try {
+    const examen = await pool.query('SELECT * FROM "EXAMEN" WHERE "ID_CURSO" = $1', [id_curso]);
+    console.log(examen)
+    //Obtener rows del query
+    const examen_rows = examen.rows[0];
+    res.json(examen_rows);
+  } catch (error) {
+    res.json({ error: error.message });
+    }
+}
 
 module.exports = {
     mostrarCursos,
-    mostrarMaterial
+    mostrarMaterial,
+    mostrarExamen
 }
