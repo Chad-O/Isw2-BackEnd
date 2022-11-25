@@ -31,6 +31,17 @@ const buscarUsuarios = async (req,res) =>{
     }
     
 }
+//Buscar todos los Alumnos
+const buscarAlumnos = async (req,res) =>{
+    try{
+        const result = await pool.query('SELECT * FROM "USUARIO" WHERE "TIPO_USUARIO" = 1');
+        res.json(result)
+    }
+    catch(error){
+        console.error(error.message);
+    }
+}
+
 //registrar usuario y profesor
 const registrarProfesor = async (req, res) => {
     const { TIPO_USUARIO,PRIMER_NOM, AP_PAT, AP_MAT, NOM_USUARIO, PASSWORD, E_MAIL, NUM_CEL, DOC_ID } = req.body;
@@ -88,6 +99,7 @@ const cambioContraseña = async (req,res) =>{
 module.exports = {
     iniciarSesion,
     buscarUsuarios,
+    buscarAlumnos,
     registrarProfesor,
     registrarAlumno,
     cambioContraseña
