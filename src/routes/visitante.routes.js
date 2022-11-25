@@ -11,7 +11,7 @@ const validInfo = require("../middleware/validInfo");
 const routerVisitante = Router();
 routerVisitante.get('/usuarios', buscarUsuarios);
 
-routerVisitante.get('/visitante/buscaAlumnos',buscarAlumnos);
+routerVisitante.get('/buscaAlumnos',buscarAlumnos);
 
 routerVisitante.post('/visitante/registrarProfesor', registrarProfesor);
 

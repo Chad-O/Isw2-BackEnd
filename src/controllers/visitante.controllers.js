@@ -34,7 +34,7 @@ const buscarUsuarios = async (req,res) =>{
 //Buscar todos los Alumnos
 const buscarAlumnos = async (req,res) =>{
     try{
-        const result = await pool.query('SELECT * FROM "USUARIO" WHERE "TIPO_USUARIO" = 1');
+        const result = await pool.query('SELECT * FROM "USUARIO" WHERE "TIPO_USUARIO" = $1', [1]);
         res.json(result)
     }
     catch(error){
